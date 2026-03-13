@@ -1,24 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>My Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lohita Reddy | Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --bg-color: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        section {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .tags {
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background-color: #e2e8f0;
+            color: #475569;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            display: inline-block;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            color: var(--text-muted);
+            margin-top: 4rem;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Hello, I'm Lohita 👋</h1>
+    <header>
+        <h1>Lohita Reddy</h1>
+        <p class="subtitle">CSE Student @ NGIT | Web Developer | Deep Learning Enthusiast</p>
+        <div class="social-links">
+            <a href="https://github.com/Lohita15" target="_blank">GitHub Profile</a>
+            <a href="https://www.linkedin.com/in/lohita-reddy-74860a315" target="_blank">LinkedIn Profile</a>
+        </div>
+    </header>
 
-<h2>About Me</h2>
-<p>I'm a Computer Science student interested in AI and software development.</p>
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am a second-year Computer Science and Engineering student at Neil Gogte Institute of Technology (NGIT) in Hyderabad, Telangana. I specialize in building intuitive web applications and exploring the practical applications of Deep Learning and NLP to solve real-world problems.</p>
+    </section>
 
-<h2>Projects</h2>
-<ul>
-<li>GitHub Clone Project</li>
-<li>Iris Dataset Classification</li>
-<li>Machine Learning Projects</li>
-</ul>
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Nutra: Indian Food Calorie Estimation</h3>
+                <p>An AI-powered system designed to estimate the calorie content of Indian food directly from images using advanced vision models.</p>
+                <div class="tags">
+                    <span class="tag">Deep Learning</span>
+                    <span class="tag">CNN</span>
+                    <span class="tag">ViT</span>
+                    <span class="tag">Python</span>
+                </div>
+            </div>
 
-<h2>Contact</h2>
-<p>GitHub: https://github.com/yourusername</p>
+            <div class="card">
+                <h3>SAMADHAN</h3>
+                <p>An open innovation platform built to report, discuss, and crowdsource solutions for community-level problems.</p>
+                <div class="tags">
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Web Development</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Smart Drug Interaction Advisor</h3>
+                <p>An NLP-based application that detects potential interactions between different medications and generates clear explanations for users.</p>
+                <div class="tags">
+                    <span class="tag">NLP</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">AI</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>JPMC Forage Midas</h3>
+                <p>Completed the JPMorgan Chase & Co. Advanced Software Engineering virtual experience, focusing on enterprise-level development workflows.</p>
+                <div class="tags">
+                    <span class="tag">Java</span>
+                    <span class="tag">Software Engineering</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills-container">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Python</span>
+            <span class="tag">Java</span>
+            <span class="tag">C</span>
+            <span class="tag">SQL / Relational Databases</span>
+            <span class="tag">Deep Learning</span>
+            <span class="tag">Natural Language Processing</span>
+            <span class="tag">HTML/CSS</span>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Lohita Reddy. Built with passion.</p>
+    </footer>
 
 </body>
 </html>

@@ -1,210 +1,745 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lohita Reddy | Portfolio</title>
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --bg-color: #f8fafc;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lohita Reddy — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --accent: #c8a96e;
+    --accent2: #7c6fcd;
+    --text: #e8e6f0;
+    --muted: #7a7890;
+    --card: #13131c;
+  }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        header {
-            background-color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
+  html { scroll-behavior: smooth; }
 
-        h1 {
-            font-size: 3rem;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
 
-        .subtitle {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
 
-        .social-links a {
-            display: inline-block;
-            margin: 0 10px;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: white;
-            background-color: var(--primary-color);
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
 
-        .social-links a:hover {
-            background-color: var(--secondary-color);
-        }
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .orb1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(124,111,205,0.25) 0%, transparent 70%);
+    top: -100px; right: 200px;
+    animation: drift 8s ease-in-out infinite alternate;
+  }
+  .orb2 {
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(200,169,110,0.18) 0%, transparent 70%);
+    bottom: 50px; left: 100px;
+    animation: drift 10s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes drift {
+    from { transform: translate(0, 0); }
+    to { transform: translate(30px, 20px); }
+  }
 
-        section {
-            max-width: 1000px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-        }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative;
+    z-index: 10;
+  }
 
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--primary-color);
-            display: inline-block;
-            padding-bottom: 0.5rem;
-        }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,169,110,0.1);
+    border: 1px solid rgba(200,169,110,0.25);
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    width: fit-content;
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 5vw, 72px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.15s ease forwards;
+    opacity: 0;
+  }
 
-        .card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease;
-        }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+  .hero-bio {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 44px;
+    animation: fadeUp 0.8s 0.3s ease forwards;
+    opacity: 0;
+  }
 
-        .card h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
+  .hero-links {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease forwards;
+    opacity: 0;
+  }
 
-        .tags {
-            margin-top: 1rem;
-        }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0a0f;
+  }
+  .btn-primary:hover {
+    background: #dfc07f;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(200,169,110,0.3);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover {
+    border-color: var(--accent2);
+    color: var(--accent2);
+    transform: translateY(-2px);
+  }
 
-        .tag {
-            background-color: #e2e8f0;
-            color: #475569;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.875rem;
-            display: inline-block;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    animation: fadeIn 1.2s 0.3s ease forwards;
+    opacity: 0;
+  }
 
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
+  .avatar-wrapper {
+    position: relative;
+  }
+  .avatar-ring {
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,169,110,0.2);
+    animation: spin 20s linear infinite;
+  }
+  .avatar-ring::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: -4px;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background-color: white;
-            color: var(--text-muted);
-            margin-top: 4rem;
-        }
-    </style>
+  .avatar-img {
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(200,169,110,0.3);
+    display: block;
+  }
+
+  .avatar-badge {
+    position: absolute;
+    bottom: 10px; right: -20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .avatar-badge span { color: var(--accent); font-weight: 500; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 900;
+    padding: 20px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(20px);
+    background: rgba(10,10,15,0.7);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ─── SECTION COMMON ─── */
+  section { padding: 100px 80px; }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 60px;
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.9;
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    transition: border-color 0.3s;
+  }
+  .stat-card:hover { border-color: rgba(200,169,110,0.3); }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* ─── SKILLS ─── */
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 28px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .skill-group:hover {
+    transform: translateY(-4px);
+    border-color: rgba(124,111,205,0.3);
+  }
+  .skill-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+  .skill-group h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tag {
+    background: rgba(124,111,205,0.1);
+    border: 1px solid rgba(124,111,205,0.2);
+    color: #a89fe0;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+  .tag.gold {
+    background: rgba(200,169,110,0.1);
+    border-color: rgba(200,169,110,0.2);
+    color: var(--accent);
+  }
+
+  /* ─── PROJECTS ─── */
+  .projects { background: var(--surface); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 32px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(200,169,110,0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(200,169,110,0.25);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .project-card:hover::before { opacity: 1; }
+
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .project-emoji { font-size: 32px; }
+  .project-arrow {
+    color: var(--muted);
+    font-size: 20px;
+    transition: color 0.3s, transform 0.3s;
+  }
+  .project-card:hover .project-arrow {
+    color: var(--accent);
+    transform: translate(4px, -4px);
+  }
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .project-desc {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .project-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .lang-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .lang-js { background: #f7df1e; }
+  .lang-java { background: #ed8b00; }
+  .lang-py { background: #3572A5; }
+  .lang-other { background: #7c6fcd; }
+
+  /* ─── CONTACT ─── */
+  .contact-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-inner .section-label,
+  .contact-inner .section-title { text-align: center; }
+  .contact-inner p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 44px;
+  }
+  .contact-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* ─── DIVIDER LINE ─── */
+  .line-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), transparent);
+    margin-bottom: 40px;
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    section { padding: 70px 24px; }
+    .about-grid, .skills-container, .projects-grid { grid-template-columns: 1fr; gap: 20px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+    .hero-left { padding: 120px 24px 60px; }
+  }
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>Lohita Reddy</h1>
-        <p class="subtitle">CSE Student @ NGIT | Web Developer | Deep Learning Enthusiast</p>
-        <div class="social-links">
-            <a href="https://github.com/Lohita15" target="_blank">GitHub Profile</a>
-            <a href="https://www.linkedin.com/in/lohita-reddy-74860a315" target="_blank">LinkedIn Profile</a>
-        </div>
-    </header>
+<nav>
+  <a class="nav-logo" href="#">L.R</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>I am a second-year Computer Science and Engineering student at Neil Gogte Institute of Technology (NGIT) in Hyderabad, Telangana. I specialize in building intuitive web applications and exploring the practical applications of Deep Learning and NLP to solve real-world problems.</p>
-    </section>
+<!-- ─── HERO ─── -->
+<section class="hero" style="padding:0">
+  <div class="orb1 hero-orb"></div>
+  <div class="orb2 hero-orb"></div>
 
-    <section id="projects">
-        <h2>Featured Projects</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Nutra: Indian Food Calorie Estimation</h3>
-                <p>An AI-powered system designed to estimate the calorie content of Indian food directly from images using advanced vision models.</p>
-                <div class="tags">
-                    <span class="tag">Deep Learning</span>
-                    <span class="tag">CNN</span>
-                    <span class="tag">ViT</span>
-                    <span class="tag">Python</span>
-                </div>
-            </div>
+  <div class="hero-left">
+    <div class="hero-tag">Available for Opportunities</div>
+    <h1>Lohita<br><em>Reddy</em></h1>
+    <p class="hero-bio">
+      Second-year CSE student at Neil Gogte Institute of Technology, Hyderabad. 
+      Passionate about crafting meaningful web experiences and exploring the frontiers of Deep Learning.
+    </p>
+    <div class="hero-links">
+      <a href="https://github.com/Lohita15" target="_blank" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/lohita-reddy-74860a315" target="_blank" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
 
-            <div class="card">
-                <h3>SAMADHAN</h3>
-                <p>An open innovation platform built to report, discuss, and crowdsource solutions for community-level problems.</p>
-                <div class="tags">
-                    <span class="tag">JavaScript</span>
-                    <span class="tag">Web Development</span>
-                </div>
-            </div>
+  <div class="hero-right">
+    <div class="avatar-wrapper">
+      <div class="avatar-ring"></div>
+      <img class="avatar-img" src="https://avatars.githubusercontent.com/u/213969597?v=4" alt="Lohita Reddy">
+      <div class="avatar-badge">CSE Student <span>@ NGIT</span></div>
+    </div>
+  </div>
+</section>
 
-            <div class="card">
-                <h3>Smart Drug Interaction Advisor</h3>
-                <p>An NLP-based application that detects potential interactions between different medications and generates clear explanations for users.</p>
-                <div class="tags">
-                    <span class="tag">NLP</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">AI</span>
-                </div>
-            </div>
+<!-- ─── ABOUT ─── -->
+<section class="about" id="about">
+  <div class="reveal">
+    <p class="section-label">About me</p>
+    <h2 class="section-title">Curious mind.<br>Creative builder.</h2>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>
+        I'm Lohita, a Computer Science & Engineering student at Neil Gogte Institute of Technology in Hyderabad, Telangana. Currently in my second year, I'm on an exciting journey exploring the vast landscape of technology.
+      </p>
+      <p>
+        My primary interests lie at the intersection of web development and deep learning — I love building intuitive interfaces and training models that make sense of the world. I believe great software is both beautiful and intelligent.
+      </p>
+      <p>
+        When I'm not coding, you'll find me exploring new frameworks, contributing to open-source, and connecting with the developer community.
+      </p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">2nd</div>
+        <div class="stat-label">Year CSE Student</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">GitHub Repositories</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Core Interests</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Things to Learn</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="card">
-                <h3>JPMC Forage Midas</h3>
-                <p>Completed the JPMorgan Chase & Co. Advanced Software Engineering virtual experience, focusing on enterprise-level development workflows.</p>
-                <div class="tags">
-                    <span class="tag">Java</span>
-                    <span class="tag">Software Engineering</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ─── SKILLS ─── -->
+<section id="skills">
+  <div class="reveal">
+    <p class="section-label">Expertise</p>
+    <h2 class="section-title">Skills &amp;<br>Technologies</h2>
+  </div>
+  <div class="skills-container reveal">
+    <div class="skill-group">
+      <div class="skill-icon">🌐</div>
+      <h3>Web Development</h3>
+      <div class="skill-tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-icon">🤖</div>
+      <h3>Deep Learning</h3>
+      <div class="skill-tags">
+        <span class="tag gold">Python</span>
+        <span class="tag gold">TensorFlow</span>
+        <span class="tag gold">Neural Nets</span>
+        <span class="tag gold">ML</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-icon">⚙️</div>
+      <h3>Programming</h3>
+      <div class="skill-tags">
+        <span class="tag">Java</span>
+        <span class="tag">Python</span>
+        <span class="tag">Git</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">VS Code</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="skills">
-        <h2>Technical Skills</h2>
-        <div class="skills-container">
-            <span class="tag">JavaScript</span>
-            <span class="tag">Python</span>
-            <span class="tag">Java</span>
-            <span class="tag">C</span>
-            <span class="tag">SQL / Relational Databases</span>
-            <span class="tag">Deep Learning</span>
-            <span class="tag">Natural Language Processing</span>
-            <span class="tag">HTML/CSS</span>
-        </div>
-    </section>
+<!-- ─── PROJECTS ─── -->
+<section class="projects" id="projects">
+  <div class="reveal">
+    <p class="section-label">My work</p>
+    <h2 class="section-title">Featured<br>Projects</h2>
+  </div>
+  <div class="projects-grid reveal">
 
-    <footer>
-        <p>&copy; 2026 Lohita Reddy. Built with passion.</p>
-    </footer>
+    <a href="https://github.com/Lohita15/SAMADHAN" target="_blank" class="project-card">
+      <div class="project-header">
+        <span class="project-emoji">🏘️</span>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-title">SAMADHAN</div>
+      <p class="project-desc">An open innovation platform to report, discuss, and solve community problems. Empowering citizens to raise local issues and collaborate on solutions.</p>
+      <div class="project-lang">
+        <span class="lang-dot lang-js"></span>
+        JavaScript
+      </div>
+    </a>
 
+    <a href="https://github.com/Lohita15/Weather_app" target="_blank" class="project-card">
+      <div class="project-header">
+        <span class="project-emoji">🌦️</span>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-title">Weather App</div>
+      <p class="project-desc">A Python-based weather application that fetches real-time weather data and presents it in a clean, user-friendly interface.</p>
+      <div class="project-lang">
+        <span class="lang-dot lang-py"></span>
+        Python
+      </div>
+    </a>
+
+    <a href="https://github.com/Lohita15/forage-midas" target="_blank" class="project-card">
+      <div class="project-header">
+        <span class="project-emoji">🏦</span>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-title">JPMC Forage — Midas</div>
+      <p class="project-desc">Project built as part of the JP Morgan Chase Advanced Software Engineering virtual experience program on Forage. Demonstrates enterprise-level Java development practices.</p>
+      <div class="project-lang">
+        <span class="lang-dot lang-java"></span>
+        Java
+      </div>
+    </a>
+
+    <a href="https://github.com/Lohita15/yatra" target="_blank" class="project-card">
+      <div class="project-header">
+        <span class="project-emoji">✈️</span>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-title">Yatra</div>
+      <p class="project-desc">A travel-themed project exploring how technology can enhance the journey planning experience. Built with modern web technologies.</p>
+      <div class="project-lang">
+        <span class="lang-dot lang-other"></span>
+        Web
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <p class="section-label">Let's connect</p>
+    <h2 class="section-title">Got an idea?<br><em style="font-style:italic;color:var(--accent)">Let's talk.</em></h2>
+    <div class="line-divider" style="margin: 0 auto 40px;"></div>
+    <p>I'm always excited to collaborate on interesting projects, explore new opportunities, or just have a good conversation about tech. Feel free to reach out!</p>
+    <div class="contact-links">
+      <a href="https://github.com/Lohita15" target="_blank" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        View GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/lohita-reddy-74860a315" target="_blank" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Connect on LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Designed with ♥ — Lohita Reddy © 2025</span>
+  <span>CSE · NGIT · Hyderabad</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
